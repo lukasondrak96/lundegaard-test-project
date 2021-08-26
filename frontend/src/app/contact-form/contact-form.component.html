@@ -1,0 +1,127 @@
+<div *ngIf="dataLoaded && !errorWhileLoadingData"
+     class="card mlr-auto">
+  <div class="card-header">
+    <h4 class="card-title"> Contact us</h4>
+  </div>
+  <div class="card-body">
+    <form name="form"
+          #f="ngForm"
+          (ngSubmit)="f.form.valid && sendNewRequest()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="kindOfRequest">
+              Kind of request
+            </label>
+            <div>
+              <select id="kindOfRequest" name="kindOfRequest" [(ngModel)]="formValues.requestType" required>
+                <option *ngFor="let requestType of requestTypes" [value]="requestType">
+                  {{ requestType }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="policyNumber"> Policy number </label>
+            <div>
+              <input id="policyNumber"
+                     name="policyNumber"
+                     placeholder=""
+                     type="text"
+                     #policyNumber="ngModel"
+                     [(ngModel)]="formValues.policyNumber"
+                     required/>
+              <div *ngIf="f.submitted && policyNumber.invalid">
+                <div *ngIf="policyNumber.errors?.required">
+                  {{ REQUIRED_FIELD }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="name"> Name </label>
+            <div>
+              <input id="name"
+                     name="name"
+                     placeholder=""
+                     type="text"
+                     #name="ngModel"
+                     [(ngModel)]="formValues.name"
+                     required
+              />
+              <div *ngIf="f.submitted && name.invalid">
+                <div *ngIf="name.errors?.required">
+                  {{ REQUIRED_FIELD }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="surname"> Surname </label>
+            <div>
+              <input id="surname"
+                     name="surname"
+                     placeholder=""
+                     type="text"
+                     #surname="ngModel"
+                     [(ngModel)]="formValues.surname"
+                     required
+              />
+              <div *ngIf="f.submitted && surname.invalid">
+                <div *ngIf="surname.errors?.required">
+                  {{ REQUIRED_FIELD }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="requestText"> Your request </label>
+            <div>
+              <textarea id="requestText"
+                     name="requestText"
+                     placeholder=""
+                     type="text"
+                     maxlength="5000"
+                     #requestText="ngModel"
+                     [(ngModel)]="formValues.requestText"
+                     required
+              ></textarea>
+              <div *ngIf="f.submitted && requestText.invalid">
+                <div *ngIf="requestText.errors?.required">
+                  {{ REQUIRED_FIELD }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit"
+              id="submitButton"
+              class="btn btn-primary btn-fill pull-right">
+        SEND REQUEST
+      </button>
+
+    </form>
+  </div>
+</div>
