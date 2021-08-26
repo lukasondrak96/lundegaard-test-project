@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
-public class PolicyOwner implements Serializable {
+public class RequestSender implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,5 @@ public class PolicyOwner implements Serializable {
 
     @NotBlank(message = "Policy number is mandatory")
     private String policyNumber;
-
-
 
 }

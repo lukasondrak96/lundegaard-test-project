@@ -17,7 +17,11 @@ public class ContactRequest implements Serializable {
     @NotBlank(message = "Message is mandatory")
     private String message;
 
-    @ManyToOne
-    @JoinColumn(name = "contact_request_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "request_type_id", referencedColumnName = "id")
     private ContactRequestType requestType;
+
+    @ManyToOne
+    @JoinColumn(name = "request_sender_id", referencedColumnName = "id")
+    private RequestSender requestSender;
 }
