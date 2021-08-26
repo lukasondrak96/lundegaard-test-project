@@ -1,0 +1,8 @@
+/backend/target/
+/node/
+/frontend/bin/
+/node/
+/frontend/node/
+/frontend/nodemodules/
+/frontend/target
+/.idea/
