@@ -22,7 +22,6 @@ public class ContactRequestTypeController {
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<String> getAllRequestTypes() {
-//        return new ResponseEntity<>(contactRequestTypeService.findAllRequestTypes(), HttpStatus.OK);
         return contactRequestTypeService.findAllRequestTypes();
     }
 

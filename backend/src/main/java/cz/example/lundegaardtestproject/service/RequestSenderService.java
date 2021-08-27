@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class RequestSenderService {
 
+    private final RequestSenderRepository requestSenderRepository;
+
     @Autowired
-    private RequestSenderRepository requestSenderRepository;
+    public RequestSenderService(RequestSenderRepository requestSenderRepository) {
+        this.requestSenderRepository = requestSenderRepository;
+    }
 
     public RequestSender addRequestSender(RequestSender sender) {
         return requestSenderRepository.save(sender);
@@ -29,7 +33,17 @@ public class RequestSenderService {
     public RequestSender findRequestSenderById(Integer id) {
         return requestSenderRepository.findById(id)
                 .orElseThrow(() ->
-                        new RequestSenderNotFoundException("Request sender with id "  + id + " does not exists")
+                        new RequestSenderNotFoundException("Request sender with id " + id + " does not exists")
                 );
+    }
+
+    public RequestSender findRequestSenderByAttributes(String name, String surname, String policyNumber) {
+        List<RequestSender> foundSenders = requestSenderRepository.findRequestSenderByNameAndSurnameAndPolicyNumber(name, surname, policyNumber);
+        if (foundSenders.isEmpty())
+            return null;
+        else if (foundSenders.size() > 1)
+            throw new RuntimeException("Unexpected database state, more request senders with same attributes!");
+        else
+            return foundSenders.get(0);
     }
 }

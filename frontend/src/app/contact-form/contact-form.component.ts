@@ -50,14 +50,29 @@ export class ContactFormComponent implements OnInit {
   sendNewRequest() {
     (document.getElementById('submitButton') as HTMLButtonElement).disabled = true;
     this.contactFormService.sendNewRequest(this.formValues).subscribe(
-      () => {
+      (res: string) => {
+        alert(res)
         window.location.reload();
-        alert("Request submitted successfully!");
       },
-      () => {
-        alert("Request was not submitted successfully!");
+      err => {
+        //i am getting http error 406 here, so it will jump to this error, if its in real 200 (error is lower)...
+        //didnt find out why, I thought its because of json,
+        //thats why i am sending only Strings rather than Response entities with objects, but it did not help
+        alert(err.error.text);
         (document.getElementById('submitButton') as HTMLButtonElement).disabled = false;
+        if (err.error.text == "Request submitted successfully")
+          window.location.reload();
       }
     );
   }
+
+
+  //that error was like this:
+  // headers: HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, lazyInit: ƒ}
+  // message: "Http failure during parsing for http://localhost:8080/api/request/sendrequest"
+  // name: "HttpErrorResponse"
+  // ok: false
+  // status: 200
+  // statusText: "OK"
+  // url: "http://localhost:8080/api/request/sendrequest"
 }

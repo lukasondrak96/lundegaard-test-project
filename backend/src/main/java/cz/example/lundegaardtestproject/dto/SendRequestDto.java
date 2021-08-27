@@ -4,10 +4,9 @@ import lombok.Data;
 
 @Data
 public class SendRequestDto {
-
-    private String kindOfRequest;
+    private String requestType;
     private String policyNumber;
     private String name;
     private String surname;
-    private String request;
+    private String requestText;
 }

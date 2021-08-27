@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class ContactRequestService {
 
+    private final ContactRequestRepository contactRequestRepository;
+
     @Autowired
-    private ContactRequestRepository contactRequestRepository;
+    public ContactRequestService(ContactRequestRepository contactRequestRepository) {
+        this.contactRequestRepository = contactRequestRepository;
+    }
 
     public ContactRequest addContactRequest(ContactRequest contactRequest) {
         return contactRequestRepository.save(contactRequest);

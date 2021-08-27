@@ -14,6 +14,7 @@ public class ContactRequest implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(columnDefinition = "text", length = 5000)
     @NotBlank(message = "Message is mandatory")
     private String message;
 
