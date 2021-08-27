@@ -4,6 +4,7 @@ Lundegaard test project is simple test web application with only one form writte
 The project was not fully completed due to time constraints. Also no tests were added unfornatelly due this constraint. 
 This app could be also used as basic template for creating Java Spring and Angular applications as two separate modules in one project.
 It uses Postgresql as database system because it is easy and free. In project structure takes place file import.sql which is init file for database initialization.
+Database called postgres run on localhost:5432, its password is also postgres, but you can simply change these credentials in application.properties file.
 
 This application was developed for Lundegaard company as task for testing my Java skills.
 
