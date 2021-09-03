@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ContactFormService} from "../../services/contact-form.service";
 import {ContactFormModel} from "../models/ContactFormModel";
+import {ResponseModel} from "../models/ResponseModel";
 
 @Component({
   selector: 'app-contact-form',
@@ -50,18 +51,13 @@ export class ContactFormComponent implements OnInit {
   sendNewRequest() {
     (document.getElementById('submitButton') as HTMLButtonElement).disabled = true;
     this.contactFormService.sendNewRequest(this.formValues).subscribe(
-      (res: string) => {
-        alert(res)
+      (res: ResponseModel) => {
+        alert(res.message)
         window.location.reload();
       },
       err => {
-        //i am getting http error 406 here, so it will jump to this error, if its in real 200 (error is lower)...
-        //didnt find out why, I thought its because of json,
-        //thats why i am sending only Strings rather than Response entities with objects, but it did not help
-        alert(err.error.text);
-        (document.getElementById('submitButton') as HTMLButtonElement).disabled = false;
-        if (err.error.text == "Request submitted successfully")
-          window.location.reload();
+        alert("Server error");
+        window.location.reload();
       }
     );
   }
